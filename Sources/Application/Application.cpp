@@ -32,6 +32,7 @@ Application::Application(const char *windowName, int width, int height, int _max
 
 Application::~Application()
 {
+    std::cout << "Closing..." << std::endl;
     SDL_DestroyWindow(this->window);
     SDL_Quit();
 }
@@ -44,7 +45,6 @@ void Application::handleEvents()
         {
         case SDL_QUIT:
             isRunning = false;
-            std::cout << "Closing..." << std::endl;
             break;
 
         // WINDOW EVENTS //
@@ -60,7 +60,6 @@ void Application::handleEvents()
             {
             case SDLK_q:
                 isRunning = false;
-                std::cout << "Closing..." << std::endl;
                 break;
 
             default:
@@ -74,7 +73,7 @@ void Application::handleEvents()
                 int mouseX = event.button.x;
                 int mouseY = event.button.y;
                 // std::cout << "Left click (X = " << mouseX << " ; Y = " << mouseY << ")" << std::endl;
-                fruits.push_back(Fruit(mouseX, mouseY));
+                fruits.push_back(Fruit(mouseX, mouseY, rand() % 20 + 5));
             }
             break;
 
@@ -92,14 +91,20 @@ void Application::Run()
 
     while (isRunning)
     {
-        // Delta time calculation
+        // Event loop
+        handleEvents();
+
+        // Calculate dT (in seconds)
         lastFrame = currentFrame;
         currentFrame = SDL_GetPerformanceCounter();
         deltaTime = (double)((currentFrame - lastFrame) * 1000 / (double)SDL_GetPerformanceFrequency());
 
-        // Main loop
-        handleEvents();
-        mySolver.update(deltaTime * 0.08f);
+        // Physics loop
+        mySolver.update(1.f);
+
+        SDL_Delay(10);
+
+        // Rendering loop
         myRenderer.render();
     }
 }

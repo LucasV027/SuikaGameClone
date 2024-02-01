@@ -1,5 +1,6 @@
 #pragma once
 
+#include <math.h>
 #include <string>
 
 class Vec2Float
@@ -22,6 +23,12 @@ public:
     Vec2Float operator+(Vec2Float other) const;
     Vec2Float operator-(Vec2Float other) const;
     Vec2Float operator*(float lambda) const;
+    Vec2Float operator/(float lambda) const;
+    Vec2Float &operator=(float n);
+    Vec2Float &operator=(const Vec2Float &other);
+
+    // Logic
+    float length() const;
 
     // Display
     std::string toString() const;

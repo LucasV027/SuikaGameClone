@@ -13,10 +13,11 @@ class Fruit
 {
 public:
     // Constructors
-    Fruit(int x, int y);
+    Fruit(int x, int y, float rad);
 
     // Getters
     Vec2Float getPosition() const;
+    float getRadius() const;
 
     // Physics logic
     void setPosition(Vec2Float newPosition);

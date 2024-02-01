@@ -24,4 +24,31 @@ Vec2Float Vec2Float::operator*(float lambda) const
     return Vec2Float(this->x * lambda, this->y * lambda);
 }
 
+Vec2Float Vec2Float::operator/(float lambda) const
+{
+    return Vec2Float(this->x / lambda, this->y / lambda);
+}
+
+Vec2Float &Vec2Float::operator=(float n)
+{
+    this->x = n;
+    this->y = n;
+    return *this;
+}
+
+Vec2Float &Vec2Float::operator=(const Vec2Float &other)
+{
+    if (this != &other)
+    {
+        x = other.x;
+        y = other.y;
+    }
+    return *this;
+}
+
+float Vec2Float::length() const
+{
+    return sqrt(pow(x, 2) + pow(y, 2));
+}
+
 std::string Vec2Float::toString() const { return "(" + std::to_string(x) + ", " + std::to_string(y) + ")"; }

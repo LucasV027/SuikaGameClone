@@ -17,20 +17,21 @@ void Renderer::linkVector(std::vector<Fruit> *ptr) { fruits = ptr; }
 
 void Renderer::render()
 {
+    // Bg clearing
     SDL_SetRenderDrawColor(rRenderer, 48, 46, 43, 255);
     SDL_RenderClear(rRenderer);
 
+    // Bg square
+    SDL_SetRenderDrawColor(rRenderer, 0, 0, 0, 255);
+    SDL_Rect bg{50, 50, 700, 700};
+    SDL_RenderFillRect(rRenderer, &bg);
+
+    // Fruit rendering
     for (const Fruit &fruit : *fruits)
     {
         Vec2Float fruitPosition = fruit.getPosition();
         SDL_SetRenderDrawColor(rRenderer, 0, 0, 255, 255);
-        this->SDL_RenderFillCircle(fruitPosition.getX(), fruitPosition.getY(), 20);
-
-        /*
-        SDL_Rect squareRect = {fruitPosition.getX(), fruitPosition.getY(), 10, 10};
-        SDL_SetRenderDrawColor(rRenderer, 0, 0, 255, 255);
-        SDL_RenderFillRect(rRenderer, &squareRect);
-        */
+        this->SDL_RenderFillCircle(fruitPosition.getX(), fruitPosition.getY(), fruit.getRadius());
     }
 
     SDL_RenderPresent(rRenderer);

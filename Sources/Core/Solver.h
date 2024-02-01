@@ -6,7 +6,7 @@
 
 #include "../Utils/Vec2Float.h"
 
-const Vec2Float GRAVITY(0, 1);
+const Vec2Float GRAVITY(0.f, 1.f);
 
 class Solver
 {
