@@ -12,8 +12,8 @@ private:
 public:
     // Constructors
     Vec2Float();
-    Vec2Float(int z);
-    Vec2Float(int x, int y);
+    Vec2Float(float z);
+    Vec2Float(float x, float y);
 
     // Getters
     float getX() const;

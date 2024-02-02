@@ -85,33 +85,40 @@ void Application::handleEvents()
 
 void Application::Run()
 {
-    Uint64 currentFrame = SDL_GetPerformanceCounter();
-    Uint64 lastFrame = 0;
-    double deltaTime = 0;
+    // Delta time
+    Uint32 lastUpdate = SDL_GetTicks();
 
+    // Average FPS
     int frameCounter = 0;
-    const auto start = std::chrono::high_resolution_clock::now();
+    const auto start2 = std::chrono::high_resolution_clock::now();
 
     while (isRunning)
     {
+        Uint64 start = SDL_GetPerformanceCounter();
+
         // Event loop
         handleEvents();
 
-        // Calculate dT (in seconds)
-        lastFrame = currentFrame;
-        currentFrame = SDL_GetPerformanceCounter();
-        deltaTime = (double)((currentFrame - lastFrame) * 1000 / (double)SDL_GetPerformanceFrequency());
-
         // Physics loop
-        mySolver.update(deltaTime);
+        Uint32 current = SDL_GetTicks();
+        float dT = (current - lastUpdate) / 1000.0f;
+        mySolver.update(dT);
+        lastUpdate = current;
+        std::cout << dT << std::endl;
 
         // Rendering loop
         myRenderer.render();
 
+        Uint64 end = SDL_GetPerformanceCounter();
+        float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+
+        SDL_Delay(std::max(0.f, floor(16.666f - elapsedMS)));
+
         frameCounter++;
     }
 
-    const auto end = std::chrono::high_resolution_clock::now();
-    const std::chrono::duration<double> diff = end - start;
+    // Average FPS
+    const auto end2 = std::chrono::high_resolution_clock::now();
+    const std::chrono::duration<double> diff = end2 - start2;
     std::cout << "average FPS : " << frameCounter / diff.count() << std::endl;
 }

@@ -6,7 +6,6 @@ void Solver::linkVector(std::vector<Fruit> *ptr) { fruits = ptr; }
 
 void Solver::update(float dt)
 {
-
     applyGravity();
     checkCollisions(dt);
     applyConstraint();

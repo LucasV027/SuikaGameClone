@@ -2,9 +2,9 @@
 
 Vec2Float::Vec2Float() : x(0), y(0) {}
 
-Vec2Float::Vec2Float(int _z) : x(_z), y(_z) {}
+Vec2Float::Vec2Float(float _z) : x(_z), y(_z) {}
 
-Vec2Float::Vec2Float(int _x, int _y) : x(_x), y(_y) {}
+Vec2Float::Vec2Float(float _x, float _y) : x(_x), y(_y) {}
 
 float Vec2Float::getX() const { return this->x; }
 float Vec2Float::getY() const { return this->y; }
