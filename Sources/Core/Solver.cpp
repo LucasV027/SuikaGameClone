@@ -6,18 +6,15 @@ void Solver::linkVector(std::vector<Fruit> *ptr) { fruits = ptr; }
 
 void Solver::update(float dt)
 {
-    for (int i = 0; i < 8; i++)
-    {
-        applyGravity();
-        // checkCollisions(dt);
-        applyConstraint();
-        updatePositions(dt / 8);
-    }
+
+    applyGravity();
+    checkCollisions(dt);
+    applyConstraint();
+    updatePositions(dt);
 }
 
 void Solver::applyGravity()
 {
-
     for (Fruit &fruit : *fruits)
     {
         fruit.accelerate(GRAVITY);
@@ -33,6 +30,10 @@ void Solver::checkCollisions(float dt)
     {
         for (Fruit &fruit2 : *fruits)
         {
+            if (&fruit1 == &fruit2)
+            {
+                continue;
+            }
 
             const Vec2Float v = fruit1.getPosition() - fruit2.getPosition();
             const float dist = v.length();

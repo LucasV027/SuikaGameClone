@@ -6,8 +6,8 @@
 class Vec2Float
 {
 private:
-    int x;
-    int y;
+    float x;
+    float y;
 
 public:
     // Constructors
