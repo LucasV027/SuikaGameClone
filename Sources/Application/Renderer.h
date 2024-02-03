@@ -3,6 +3,10 @@
 #include <vector>
 #include <SDL2/SDL.h>
 
+//
+#include <iostream>
+//
+
 #include "../Core/Fruit.h"
 
 class Renderer
@@ -17,6 +21,8 @@ public:
     void render();
 
     ~Renderer();
+
+    static SDL_Color getRGBColor(int input);
 
 private:
     void SDL_RenderFillCircle(int x, int y, int radius);

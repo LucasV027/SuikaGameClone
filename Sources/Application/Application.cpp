@@ -104,7 +104,6 @@ void Application::Run()
         float dT = (current - lastUpdate) / 1000.0f;
         mySolver.update(dT);
         lastUpdate = current;
-        std::cout << dT << std::endl;
 
         // Rendering loop
         myRenderer.render();

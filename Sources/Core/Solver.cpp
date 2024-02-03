@@ -6,10 +6,13 @@ void Solver::linkVector(std::vector<Fruit> *ptr) { fruits = ptr; }
 
 void Solver::update(float dt)
 {
-    applyGravity();
-    checkCollisions(dt);
-    applyConstraint();
-    updatePositions(dt);
+    for (int i = 0; i < 8; i++)
+    {
+        applyGravity();
+        checkCollisions(dt / 8.f);
+        applyConstraint();
+        updatePositions(dt / 8.f);
+    }
 }
 
 void Solver::applyGravity()
@@ -65,19 +68,19 @@ void Solver::applyConstraint()
         const Vec2Float fruitPosition = fruit.getPosition();
         const float fruitRadius = fruit.getRadius();
 
-        if (fruitPosition.getX() <= bgX + fruitRadius) // Left side
-        {
-            fruit.setPosition(Vec2Float(bgX + fruitRadius, fruitPosition.getY()));
-        }
-
-        if (fruitPosition.getX() >= bgX + bgWidth + fruitRadius) // Right side
-        {
-            fruit.setPosition(Vec2Float(bgX + bgWidth + fruitRadius, fruitPosition.getY()));
-        }
-
         if (fruitPosition.getY() >= bgY + bgHeight - fruitRadius) // Bottom side
         {
-            fruit.setPosition(Vec2Float(fruitPosition.getX(), bgY + bgHeight - fruitRadius));
+            fruit.setPosition(Vec2Float(fruit.getPosition().getX(), bgY + bgHeight - fruitRadius));
+        }
+
+        if (fruitPosition.getX() <= bgX + fruitRadius) // Left side
+        {
+            fruit.setPosition(Vec2Float(bgX + fruitRadius, fruit.getPosition().getY()));
+        }
+
+        if (fruitPosition.getX() >= bgX + bgWidth - fruitRadius) // Right side
+        {
+            fruit.setPosition(Vec2Float(bgX + bgWidth - fruitRadius, fruit.getPosition().getY()));
         }
     }
 }
