@@ -101,5 +101,5 @@ SDL_Color Renderer::getRGBColor(FruitType fT)
 
     };
 
-    return colors[(int)fT];
+    return colors[(int)fT - 1];
 }

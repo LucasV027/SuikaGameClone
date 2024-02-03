@@ -42,17 +42,21 @@ void Solver::checkCollisionsUpgradeFruit()
 
             if ((dist * dist) < (min_dist * min_dist))
             {
+                // Mark the element for future deletion
                 fruit2.changeType(FruitType::None);
 
                 Vec2Float newPosition = ((fruit1.getPosition() + fruit2.getPosition()) / 2.f);
-                fruit1 = Fruit(newPosition.getX(), newPosition.getY(), (int)fruit1.getType() + 1);
-                //   fruit1.setPosition(newPosition);
-                // fruit1.resetVelocity();
-                //  fruit1.changeType(FruitType((int)fruit1.getType() + 1));
+                int newLevel = (int)fruit1.getType() + 1;
+
+                if (newLevel <= 4)
+                {
+                    fruit1 = Fruit(newPosition.getX(), newPosition.getY(), newLevel);
+                }
             }
         }
     }
 
+    // Deletion of marked elements
     for (auto it = fruits->begin(); it != fruits->end();)
     {
         if (it->getType() == FruitType::None)
