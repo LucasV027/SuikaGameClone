@@ -26,15 +26,12 @@ void Renderer::render()
     SDL_Rect bg{50, 50, 700, 700};
     SDL_RenderFillRect(rRenderer, &bg);
 
-    int index = 0;
-
     // Fruit rendering
     for (const Fruit &fruit : *fruits)
     {
-        index++;
         Vec2Float fruitPosition = fruit.getPosition();
-        SDL_Color fruitColor = Renderer::getRGBColor(index);
-        SDL_SetRenderDrawColor(rRenderer, fruitColor.r, fruitColor.g, fruitColor.b, 255);
+        SDL_Color fruitColor = Renderer::getRGBColor(fruit.getType());
+        SDL_SetRenderDrawColor(rRenderer, fruitColor.r, fruitColor.g, fruitColor.b, fruitColor.a);
         this->SDL_RenderFillCircle(fruitPosition.getX(), fruitPosition.getY(), fruit.getRadius());
     }
 
@@ -93,16 +90,16 @@ void Renderer::SDL_RenderFillCircle(int x, int y, int radius)
     }
 }
 
-SDL_Color Renderer::getRGBColor(int input)
+SDL_Color Renderer::getRGBColor(FruitType fT)
 {
+
     SDL_Color colors[] = {
         {255, 0, 0, 255},   // Red
-        {0, 255, 0, 255},   // Green
-        {0, 0, 255, 255},   // Blue
+        {128, 0, 128, 255}, // Purple
+        {255, 165, 0, 255}, // Orange
         {255, 255, 0, 255}, // Yellow
-        {255, 0, 255, 255}, // Magenta
-        {0, 255, 255, 255}  // Cyan
+
     };
 
-    return colors[input % (sizeof(colors) / sizeof(colors[0]))];
+    return colors[(int)fT];
 }

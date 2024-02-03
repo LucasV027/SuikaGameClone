@@ -17,6 +17,7 @@ public:
 
 private:
     void applyGravity();
+    void checkCollisionsUpgradeFruit();
     void checkCollisions(float dt);
     void applyConstraint();
     void updatePositions(float dt);

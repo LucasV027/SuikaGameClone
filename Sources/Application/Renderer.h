@@ -22,7 +22,7 @@ public:
 
     ~Renderer();
 
-    static SDL_Color getRGBColor(int input);
+    static SDL_Color getRGBColor(FruitType fT);
 
 private:
     void SDL_RenderFillCircle(int x, int y, int radius);

@@ -73,7 +73,7 @@ void Application::handleEvents()
                 int mouseX = event.button.x;
                 int mouseY = event.button.y;
                 // std::cout << "Left click (X = " << mouseX << " ; Y = " << mouseY << ")" << std::endl;
-                fruits.push_back(Fruit(mouseX, mouseY, rand() % 20 + 5));
+                fruits.push_back(Fruit(mouseX, mouseY, 1 + rand() % 2));
             }
             break;
 
